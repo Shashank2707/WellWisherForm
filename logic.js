@@ -29,13 +29,15 @@ function checkEmailPattern(emailValue) {
 function post() {
     submit.style.display = "None";
     spinner.style.display = "block";
-    let date = prepareDate()
+    let date = prepareDate();
+    let occasion = getOccasion();
+    if(occasion == null ) return ;
     fetch("https://wellwisherproducer-wellwisherteam2023.b4a.run/producer/api/v1/subscribe", {
         method: "POST",
         body: JSON.stringify({
             "name": username.value.trim(),
             "email": email.value.trim(),
-            "occasion": getOccasion(),
+            "occasion": occasion,
             "occasionDate": date
         }),
         headers: {
@@ -111,11 +113,15 @@ function customField() {
 }
 
 function getOccasion() {
-    if (occasion.value.trim().length == 0) return alert("Please select occasion");
+    if (occasion.value.trim().length == 0) {
+        alert("Please select occasion");
+        return null;
+    }
 
     if (occasion.value === "other") {
         if (occasionInput.value.trim().length == 0) {
-            return alert("Please Enter the Occasion!!");
+            alert("Please Enter the Occasion!!");
+            return null;
         }
         else {
             return occasionInput.value.trim();
