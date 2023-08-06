@@ -10,6 +10,18 @@ let popup = document.getElementById("popup");
 let submit = document.getElementById("submit");
 let occasionCustom = document.getElementById("otherDiv");
 let occasionInput = document.getElementById("other");
+let spanInfo = document.getElementById("spanInfo");
+let info = document.getElementById("info");
+spanInfo.addEventListener("mouseover", function(){
+    info.style.visibility = "initial";
+    info.style.opacity = 1;
+})
+
+spanInfo.addEventListener("mouseout", function(){
+    info.style.visibility = "absolute";
+    info.style.opacity = 0;
+})
+
 spinner.style.display = "None";
 
 function checkRequiredFields() {
