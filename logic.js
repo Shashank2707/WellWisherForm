@@ -8,13 +8,15 @@ let year = document.getElementById("year");
 let spinner = document.getElementById("spinner");
 let popup = document.getElementById("popup");
 let submit = document.getElementById("submit");
+let occasionCustom = document.getElementById("otherDiv");
+let occasionInput = document.getElementById("other");
 spinner.style.display = "None";
 
 function checkRequiredFields() {
     if (username.value.trim().length == 0) return alert("Please enter name.");
     if (email.value.trim().length == 0) return alert("Please enter email.");
     if (!checkEmailPattern(email.value.trim())) return alert("Invalid email");
-    if (occasion.value.trim().length == 0) return alert("Please select occasion");
+    //Occasion value is checked in other function
     if (!checkDate(day.value, month.value, year.value)) return alert("Invalid Date!");
     post();
 }
@@ -32,15 +34,15 @@ function post() {
         method: "POST",
         body: JSON.stringify({
             "name": username.value.trim(),
-	        "email": email.value.trim(),
-	        "occasion": occasion.value.trim(),
-	        "occasionDate": date
+            "email": email.value.trim(),
+            "occasion": getOccasion(),
+            "occasionDate": date
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
     }).then(resp => processResponse(resp))
-    .catch (error => processError(error));
+        .catch(error => processError(error));
 }
 
 function processError(error) {
@@ -61,20 +63,20 @@ function processResponse(resp) {
         document.title = "Thanks for signing up!";
         return;
     };
-    if (resp.status>=400 && resp.status<500) return alert("Bad Request!");
-    if (resp.status>=500 && resp.status<600) return alert("Something went wrong!");
+    if (resp.status >= 400 && resp.status < 500) return alert("Bad Request!");
+    if (resp.status >= 500 && resp.status < 600) return alert("Something went wrong!");
 }
 
 function prepareDate() {
     let mon = month.value;
-    if (mon.length<2) mon = "0"+mon;
-    if (mon.length>2) mon = mon[mon.length-2]+mon[mon.length-1];
+    if (mon.length < 2) mon = "0" + mon;
+    if (mon.length > 2) mon = mon[mon.length - 2] + mon[mon.length - 1];
     let d = day.value;
-    if (d.length<2) d = "0"+d;
-    if (d.length>2) d = d[d.length-2]+d[d.length-1];
+    if (d.length < 2) d = "0" + d;
+    if (d.length > 2) d = d[d.length - 2] + d[d.length - 1];
     let y = year.value;
-    if (y.length>4) y = y[y.length-4]+y[y.length-3]+y[y.length-2]+y[y.length-1];
-    return y+"-"+mon+"-"+d;
+    if (y.length > 4) y = y[y.length - 4] + y[y.length - 3] + y[y.length - 2] + y[y.length - 1];
+    return y + "-" + mon + "-" + d;
 }
 
 function checkDate(day, month, year) {
@@ -83,14 +85,14 @@ function checkDate(day, month, year) {
     if (year < 1900 || year > today.getFullYear()) return false;
     if (month < 1 && month > 12) return false;
     if (day > 0) {
-        if (month == 2 && isLeapYear(year)) days[1] = 29; 
-        let monthdays = days[month-1];
+        if (month == 2 && isLeapYear(year)) days[1] = 29;
+        let monthdays = days[month - 1];
         if (day <= monthdays) return true;
     }
     return false;
 }
 
-function  isLeapYear(year) {
+function isLeapYear(year) {
     if ((year % 400 == 0) && (year % 100 == 0))
         return true;
     if ((year % 4 == 0) && (year % 100 != 0))
@@ -98,6 +100,26 @@ function  isLeapYear(year) {
     return false;
 }
 
-function customField(){
-    
+function customField() {
+
+    if (occasion.value === "other") {
+        occasionCustom.style.display = "block";
+    }
+    else {
+        occasionCustom.style.display = "none";
+    }
+}
+
+function getOccasion() {
+    if (occasion.value.trim().length == 0) return alert("Please select occasion");
+
+    if (occasion.value === "other") {
+        if (occasionInput.value.trim().length == 0) {
+            return alert("Please Enter the Occasion!!");
+        }
+        else {
+            return occasionInput.value.trim();
+        }
+    }
+    return occasion.value.trim();
 }

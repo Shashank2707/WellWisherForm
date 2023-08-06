@@ -73,6 +73,10 @@
     opacity: 0;
 }
 
+#otherDiv{
+    display: none;
+}
+
 @media (max-width: 565px) {
     .boxed {
         margin-top: 5vh;

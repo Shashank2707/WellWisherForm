@@ -46,15 +46,18 @@
                     </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label row inputfiled">
-                        <select class="mdl-textfield__input" id="occasion" name="occasion">
+                        <select class="mdl-textfield__input" id="occasion" name="occasion" onchange="customField()">
                             <option value></option>
                             <option value="Birthday">Birthday</option>
                             <option value="Anniversary">Anniversary</option>
-                            <option value="Other" onclick="customField()">Other</option>
+                            <option value="other">Other</option>
                         </select>
                         <label class="mdl-textfield__label" for="occasion">Occasion</label>
                     </div>
-
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label row inputfiled customOccasion" id="otherDiv">
+                        <input class="mdl-textfield__input" type="text" id="other">
+                        <label class="mdl-textfield__label" for="other">Custom Occasion</label>
+                    </div>
                     <div class="datediv row">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label datefamily">
                             <select class="mdl-textfield__input" id="month" name="month">
