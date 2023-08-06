@@ -27,11 +27,11 @@ function checkEmailPattern(emailValue) {
 }
 
 function post() {
+    let occasion = getOccasion();
+    if(occasion == null ) return ;
     submit.style.display = "None";
     spinner.style.display = "block";
     let date = prepareDate();
-    let occasion = getOccasion();
-    if(occasion == null ) return ;
     fetch("https://wellwisherproducer-wellwisherteam2023.b4a.run/producer/api/v1/subscribe", {
         method: "POST",
         body: JSON.stringify({
