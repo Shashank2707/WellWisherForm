@@ -13,16 +13,14 @@ let occasionInput = document.getElementById("other");
 let spanInfo = document.getElementById("spanInfo");
 let info = document.getElementById("info");
 spanInfo.addEventListener("mouseover", function(){
-    info.style.visibility = "initial";
-    info.style.opacity = 1;
+    info.style.display = "block";
 })
 
 spanInfo.addEventListener("mouseout", function(){
-    info.style.visibility = "absolute";
-    info.style.opacity = 0;
+    info.style.display = "none";
 })
 
-spinner.style.display = "None";
+spinner.style.display = "none";
 
 function checkRequiredFields() {
     if (username.value.trim().length == 0) return alert("Please enter name.");

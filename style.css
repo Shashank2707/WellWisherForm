@@ -79,8 +79,7 @@
     margin-right: 30vw;
     width: 40vw;
     transition: all 0.4s;
-    visibility: hidden;
-    opacity: 0;
+    display: none;
 }
 
 #spanInfo{
@@ -141,4 +140,10 @@
 
 .demo-card-wide>.mdl-card__menu {
     color: #fff;
+}
+
+#info>.mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url('https://www.npci.org.in/images/npci/about-us/banner.jpg') center / cover;
 }
